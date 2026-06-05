@@ -1,0 +1,185 @@
+@model RecruitmentApp.Models.Biodata
+
+<h2>Detail Biodata Pelamar</h2>
+
+@if (Model == null)
+{
+    <div class="alert alert-warning">
+        Data biodata tidak ditemukan.
+    </div>
+}
+else
+{
+    <table class="table table-bordered">
+        <tr>
+            <th>Posisi Dilamar</th>
+            <td>@Model.PosisiDilamar</td>
+        </tr>
+        <tr>
+            <th>Nama</th>
+            <td>@Model.Nama</td>
+        </tr>
+        <tr>
+            <th>No KTP</th>
+            <td>@Model.NoKtp</td>
+        </tr>
+        <tr>
+            <th>Tempat, Tanggal Lahir</th>
+            <td>@Model.TempatLahir, @Model.TanggalLahir.ToString("dd-MM-yyyy")</td>
+        </tr>
+        <tr>
+            <th>Jenis Kelamin</th>
+            <td>@Model.JenisKelamin</td>
+        </tr>
+        <tr>
+            <th>Agama</th>
+            <td>@Model.Agama</td>
+        </tr>
+        <tr>
+            <th>Golongan Darah</th>
+            <td>@Model.GolonganDarah</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>@Model.Status</td>
+        </tr>
+        <tr>
+            <th>Alamat KTP</th>
+            <td>@Model.AlamatKtp</td>
+        </tr>
+        <tr>
+            <th>Alamat Tinggal</th>
+            <td>@Model.AlamatTinggal</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>@Model.Email</td>
+        </tr>
+        <tr>
+            <th>No Telp</th>
+            <td>@Model.NoTelp</td>
+        </tr>
+        <tr>
+            <th>Kontak Darurat</th>
+            <td>@Model.KontakDarurat</td>
+        </tr>
+        <tr>
+            <th>Skill</th>
+            <td>@Model.Skill</td>
+        </tr>
+        <tr>
+            <th>Bersedia Ditempatkan</th>
+            <td>@(Model.BersediaDitempatkan ? "Ya" : "Tidak")</td>
+        </tr>
+        <tr>
+            <th>Gaji Diharapkan</th>
+            <td>@Model.GajiDiharapkan</td>
+        </tr>
+    </table>
+
+    <h4>Pendidikan Terakhir</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Jenjang</th>
+                <th>Institusi</th>
+                <th>Jurusan</th>
+                <th>Tahun Lulus</th>
+                <th>IPK</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Educations != null && Model.Educations.Any())
+            {
+                foreach (var e in Model.Educations)
+                {
+                    <tr>
+                        <td>@e.Jenjang</td>
+                        <td>@e.Institusi</td>
+                        <td>@e.Jurusan</td>
+                        <td>@e.TahunLulus</td>
+                        <td>@e.IPK.ToString("0.00")</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center">
+                        Data pendidikan belum tersedia.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Riwayat Pelatihan</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nama Kursus</th>
+                <th>Sertifikat</th>
+                <th>Tahun</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Trainings != null && Model.Trainings.Any())
+            {
+                foreach (var t in Model.Trainings)
+                {
+                    <tr>
+                        <td>@t.NamaKursus</td>
+                        <td>@t.Sertifikat</td>
+                        <td>@t.Tahun</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3" class="text-center">
+                        Data pelatihan belum tersedia.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Riwayat Pekerjaan</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nama Perusahaan</th>
+                <th>Posisi Terakhir</th>
+                <th>Pendapatan Terakhir</th>
+                <th>Tahun</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.WorkExperiences != null && Model.WorkExperiences.Any())
+            {
+                foreach (var w in Model.WorkExperiences)
+                {
+                    <tr>
+                        <td>@w.NamaPerusahaan</td>
+                        <td>@w.PosisiTerakhir</td>
+                        <td>@w.PendapatanTerakhir</td>
+                        <td>@w.Tahun</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="text-center">
+                        Data pekerjaan belum tersedia.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary">
+        Kembali
+    </a>
+}

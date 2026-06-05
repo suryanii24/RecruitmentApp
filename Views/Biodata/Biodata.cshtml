@@ -1,0 +1,231 @@
+@model RecruitmentApp.ViewModels.BiodataViewModel
+
+<h2>Entry Biodata</h2>
+
+<form asp-controller="Biodata" asp-action="Biodata" method="post">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="alert alert-info">
+        Kolom bertanda <span class="text-danger">*</span> wajib diisi.
+        Untuk angka desimal seperti IPK, gunakan titik, bukan koma. Contoh: 3.44
+    </div>
+
+    <div>
+        <label>Posisi Dilamar <span class="text-danger">*</span></label>
+        <input asp-for="PosisiDilamar" class="form-control" />
+        <span asp-validation-for="PosisiDilamar" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Nama <span class="text-danger">*</span></label>
+        <input asp-for="Nama" class="form-control" />
+        <span asp-validation-for="Nama" class="text-danger"></span>
+    </div>
+    <div>
+        <label>No KTP <span class="text-danger">*</span></label>
+        <input asp-for="NoKTP" class="form-control" />
+        <span asp-validation-for="NoKTP" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Tempat Lahir <span class="text-danger">*</span></label>
+        <input asp-for="TempatLahir" class="form-control" />
+        <span asp-validation-for="TempatLahir" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Tanggal Lahir <span class="text-danger">*</span></label>
+        <input asp-for="TanggalLahir" class="form-control" />
+        <span asp-validation-for="TanggalLahir" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Jenis Kelamin <span class="text-danger">*</span></label>
+        <input asp-for="JenisKelamin" class="form-control" />
+        <span asp-validation-for="JenisKelamin" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Agama <span class="text-danger">*</span></label>
+        <input asp-for="Agama" class="form-control" />
+        <span asp-validation-for="Agama" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Golongan Darah</label>
+        <input asp-for="GolonganDarah" class="form-control" />
+    </div>
+    <div>
+        <label>Status <span class="text-danger">*</span></label>
+        <input asp-for="Status" class="form-control" />
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Alamat KTP <span class="text-danger">*</span></label>
+        <input asp-for="AlamatKTP" class="form-control" />
+        <span asp-validation-for="AlamatKTP" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Alamat Tinggal <span class="text-danger">*</span></label>
+        <input asp-for="AlamatTinggal" class="form-control" />
+        <span asp-validation-for="AlamatTinggal" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Email <span class="text-danger">*</span></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div>
+        <label>No Telp <span class="text-danger">*</span></label>
+        <input asp-for="NoTelp" class="form-control" />
+        <span asp-validation-for="NoTelp" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Orang Terdekat yang Dapat dihubungi <span class="text-danger">*</span></label>
+        <input asp-for="OrangTerdekat" class="form-control" />
+        <span asp-validation-for="OrangTerdekat" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Skill</label>
+        <input asp-for="Skill" class="form-control" />
+    </div>
+    <div class="form-check">
+        <input asp-for="BersediaDitempatkan" class="form-check-input" type="checkbox" />
+        <label asp-for="BersediaDitempatkan" class="form-check-label">
+            Bersedia ditempatkan di seluruh kantor perusahaan
+        </label>
+    </div>
+    <div>
+        <label>Penghasilan yang diharapkan <span class="text-danger">*</span></label>
+        <input asp-for="PenghasilanDiharapkan" type="text"
+            class="form-control"
+            placeholder="Contoh: 10.000.000" />
+        @* <small class="form-text text-muted">
+            Gunakan angka tanpa titik ribuan. Contoh: 6000000 atau 6000000.50
+        </small> *@
+        <span asp-validation-for="PenghasilanDiharapkan" class="text-danger"></span>
+    </div>
+    
+    <h4>Pendidikan Terakhir</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Jenjang</th>
+                <th>Institusi</th>
+                <th>Jurusan</th>
+                <th>Tahun Lulus</th>
+                <th>IPK</th>
+            </tr>
+        </thead>
+        <tbody id="eduBody">
+            @for(int i=0; i < Model.Educations.Count; i++)
+            {
+                <tr>
+                    <td><input name="Educations[@i].Jenjang"
+                    value="@Model.Educations[i].Jenjang"
+                    class="form-control" /></td>
+
+                    <td><input name="Educations[@i].NamaInstitusi"
+                    value="@Model.Educations[i].NamaInstitusi"
+                    class="form-control" /></td>
+
+                    <td><input name="Educations[@i].Jurusan"
+                   value="@Model.Educations[i].Jurusan"
+                   class="form-control" /></td>
+
+                    <td><input name="Educations[@i].TahunLulus"
+                   value="@Model.Educations[i].TahunLulus"
+                   class="form-control" /></td>
+
+                    <td><input name="Educations[@i].IPK"
+                        value="@Model.Educations[i].IPK"
+                        type="text"                       
+                        class="form-control"
+                        placeholder="Contoh: 3.44" />
+                        @* <small class="form-text text-muted">
+                            Gunakan titik untuk desimal. Contoh: 3.44
+                        </small> *@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+    <h4>Riwayat Pelatihan</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nama Khursus / Seminar</th>
+                <th>Sertifikat (ada / tidak)</th>              
+                <th>Tahun Lulus</th>
+            </tr>
+        </thead>
+        <tbody id="eduBody">
+            @for(int i=0; i < Model.Trainings.Count; i++)
+            {
+                <tr>
+                    <td><input name="Trainings[@i].NamaKursus"
+                    value="@Model.Trainings[i].NamaKursus"
+                    class="form-control" /></td>
+
+                    <td><input name="Trainings[@i].Sertifikat"
+                    value="@Model.Trainings[i].Sertifikat"
+                    class="form-control" /></td>
+
+                    <td><input name="Trainings[@i].Tahun"
+                   value="@Model.Trainings[i].Tahun"
+                   class="form-control" /></td>                 
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Riwayat Pekerjaan</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nama Perusahaan</th>
+                <th>Posisi Terakhir</th>
+                <th>Pendapatan Terakhir</th>              
+                <th>Tahun</th>
+            </tr>
+        </thead>
+        <tbody id="eduBody">
+            @for(int i=0; i < Model.WorkExperiences.Count; i++)
+            {
+                <tr>
+                    <td><input name="WorkExperiences[@i].NamaPerusahaan"
+                    value="@Model.WorkExperiences[i].NamaPerusahaan"
+                    class="form-control" /></td>
+
+                    <td><input name="WorkExperiences[@i].PosisiTerakhir"
+                    value="@Model.WorkExperiences[i].PosisiTerakhir"
+                    class="form-control" /></td>
+
+                    <td><input name="WorkExperiences[@i].PendapatanTerakhir"
+                        value="@Model.WorkExperiences[i].PendapatanTerakhir"
+                        type="text"                      
+                        class="form-control" 
+                        placeholder="Contoh: 5.000.000"/>
+                    @* <small class="form-text text-muted">
+                        Contoh: 5000000 atau 5000000.50
+                    </small> *@
+                    </td>
+
+                    <td><input name="WorkExperiences[@i].Tahun"
+                   value="@Model.WorkExperiences[i].Tahun"
+                   class="form-control" /></td>                 
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Simpan</button>
+</form>
+
+@if (Model != null && !string.IsNullOrEmpty(Model.Nama))
+{
+    <form asp-controller="Biodata"
+          asp-action="DeleteBiodata"
+          method="post"
+          onsubmit="return confirm('Yakin ingin menghapus biodata ini?');">
+
+        <button type="submit" class="btn btn-danger mt-2">
+            Hapus Biodata
+        </button>
+    </form>
+}
